@@ -15,3 +15,5 @@ class SignInEvent extends AuthEvent {
 class SignOutEvent extends AuthEvent {}
 
 class LoadCurrentUserEvent extends AuthEvent {}
+
+class LoadUserCredentialsEvent extends AuthEvent {}

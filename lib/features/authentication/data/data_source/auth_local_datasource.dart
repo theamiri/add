@@ -1,5 +1,5 @@
 import 'package:aidra_drive/core/constant/strings.dart';
-import 'package:aidra_drive/core/hive/hive_services.dart';
+import 'package:aidra_drive/core/storage/hive/hive_services.dart';
 import 'package:aidra_drive/features/authentication/domain/models/user_model.dart';
 
 class AuthLocalDataSource extends HiveCrudService<UserModel?> {

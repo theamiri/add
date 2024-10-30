@@ -7,6 +7,9 @@ abstract class Strings {
   static const userBox = 'user_box';
   static const userKey = 'current_user';
 
+  //secure storage strings
+  static const credentialsKey = 'credentials';
+
   //failureMessages
   //TODO: need to be placed inside translation file since they not statics
   static const storageFailureMessage =
@@ -23,4 +26,7 @@ abstract class Strings {
       "Failed to connect to the server. Please check your internet connection and try again";
   static const String badResponseMessage =
       "An error occurred while processing your request. Please try again";
+
+  static const String biometricFailureMessage =
+      "Biometric authentication could not be completed. Make sure your device’s biometric credentials are valid and enrolled";
 }

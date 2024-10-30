@@ -19,22 +19,22 @@ final router = GoRouter(
         StatefulShellBranch(
           navigatorKey: _sectionNavigatorKey,
           routes: <RouteBase>[
-            Routes.home.build,
+            Routes.contentNotFound.build,
           ],
         ),
         StatefulShellBranch(
           routes: <RouteBase>[
-            Routes.home.build,
+            Routes.contentNotFound.build,
           ],
         ),
         StatefulShellBranch(
           routes: <RouteBase>[
-            Routes.home.build,
+            Routes.contentNotFound.build,
           ],
         ),
         StatefulShellBranch(
           routes: <RouteBase>[
-            Routes.home.build,
+            Routes.contentNotFound.build,
           ],
         ),
       ],

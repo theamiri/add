@@ -1,9 +1,9 @@
-import 'package:aidra_drive/core/shared/ui/screens/checkin_screen.dart';
 import 'package:aidra_drive/core/shared/ui/screens/content_not_found_screen.dart';
 import 'package:aidra_drive/core/shared/ui/screens/home_screen.dart';
 import 'package:aidra_drive/core/shared/ui/screens/splash_screen.dart';
 import 'package:aidra_drive/features/authentication/presentation/screens/forget_password/forget_password_screen.dart';
 import 'package:aidra_drive/features/authentication/presentation/screens/signin/signin_screen.dart';
+import 'package:aidra_drive/features/checkin/presentation/checkin_screen.dart';
 import 'package:go_router/go_router.dart';
 
 enum Routes {

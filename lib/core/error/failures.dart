@@ -22,6 +22,10 @@ class NetworkFailure extends Failure {
   const NetworkFailure({super.message = Strings.networkFailureMessage});
 }
 
+class BiometricFailure extends Failure {
+  const BiometricFailure({super.message = Strings.biometricFailureMessage});
+}
+
 class UnknownFailure extends Failure {
   const UnknownFailure({super.message = Strings.unknownFailureMessage});
 }

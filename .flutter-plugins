@@ -1,5 +1,15 @@
 # This is a generated file; do not edit or check into version control.
 flutter_native_splash=/Users/theamiri/.pub-cache/hosted/pub.dev/flutter_native_splash-2.4.2/
+flutter_plugin_android_lifecycle=/Users/theamiri/.pub-cache/hosted/pub.dev/flutter_plugin_android_lifecycle-2.0.23/
+flutter_secure_storage=/Users/theamiri/.pub-cache/hosted/pub.dev/flutter_secure_storage-9.2.2/
+flutter_secure_storage_linux=/Users/theamiri/.pub-cache/hosted/pub.dev/flutter_secure_storage_linux-1.2.1/
+flutter_secure_storage_macos=/Users/theamiri/.pub-cache/hosted/pub.dev/flutter_secure_storage_macos-3.1.2/
+flutter_secure_storage_web=/Users/theamiri/.pub-cache/hosted/pub.dev/flutter_secure_storage_web-1.2.1/
+flutter_secure_storage_windows=/Users/theamiri/.pub-cache/hosted/pub.dev/flutter_secure_storage_windows-3.1.2/
+local_auth=/Users/theamiri/.pub-cache/hosted/pub.dev/local_auth-2.3.0/
+local_auth_android=/Users/theamiri/.pub-cache/hosted/pub.dev/local_auth_android-1.0.46/
+local_auth_darwin=/Users/theamiri/.pub-cache/hosted/pub.dev/local_auth_darwin-1.4.1/
+local_auth_windows=/Users/theamiri/.pub-cache/hosted/pub.dev/local_auth_windows-1.0.11/
 path_provider=/Users/theamiri/.pub-cache/hosted/pub.dev/path_provider-2.1.4/
 path_provider_android=/Users/theamiri/.pub-cache/hosted/pub.dev/path_provider_android-2.2.12/
 path_provider_foundation=/Users/theamiri/.pub-cache/hosted/pub.dev/path_provider_foundation-2.4.0/

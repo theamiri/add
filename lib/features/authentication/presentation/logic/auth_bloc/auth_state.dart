@@ -7,13 +7,10 @@ sealed class AuthState extends Equatable {
   List<Object> get props => [];
 }
 
-//initial
 final class AuthInitialState extends AuthState {}
 
-//loading
 final class AuthenticatingState extends AuthState {}
 
-//failure
 final class AuthenticationFailureState extends AuthState {
   final Failure failure;
   const AuthenticationFailureState({required this.failure});
@@ -25,3 +22,10 @@ class AuthenticatedState extends AuthState {
 }
 
 class UnauthenticatedState extends AuthState {}
+
+class NoUserCredentialsFoundState extends AuthState {}
+
+class UserCredentialsLoadedState extends AuthState {
+  final CredentialsModel credentials;
+  const UserCredentialsLoadedState({required this.credentials});
+}

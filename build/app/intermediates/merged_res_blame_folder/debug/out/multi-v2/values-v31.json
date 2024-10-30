@@ -1,0 +1,28 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.example.aidra_drive.app-mergeDebugResources-28:/values-v31/values-v31.xml",
+            "map": [
+                {
+                    "source": "/Users/theamiri/Documents/aidra_drive/android/app/src/main/res/values-v31/styles.xml",
+                    "from": {
+                        "startLines": "3,16",
+                        "startColumns": "4,4",
+                        "startOffsets": "173,952",
+                        "endLines": "9,18",
+                        "endColumns": "12,12",
+                        "endOffsets": "601,1116"
+                    },
+                    "to": {
+                        "startLines": "2,9",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,488",
+                        "endLines": "8,11",
+                        "endColumns": "12,12",
+                        "endOffsets": "483,652"
+                    }
+                }
+            ]
+        }
+    ]
+}

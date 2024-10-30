@@ -25,18 +25,41 @@ class HomeScreen extends StatelessWidget {
         }
       },
       child: Scaffold(
-        body: Center(
-          child: SizedBox(
-            width: MediaQuery.of(context).size.width - 60,
-            child: ElevatedButton(
-              onPressed: () {
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            ElevatedButton(
+              onPressed: () async {
                 context.read<AuthBloc>().add(
                       SignOutEvent(),
                     );
               },
               child: const Text('signOut'),
             ),
-          ),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () async {
+                print(
+                  "forget the objectif of this app and been used to immutate",
+                );
+                // try {
+                //   final LocalAuthentication auth = LocalAuthentication();
+                //   final finalauth = await auth.authenticate(
+                //     localizedReason:
+                //         'Sign in using your biometrics for a faster, secure experience',
+                //     options: const AuthenticationOptions(),
+                //   );
+                //   print(finalauth);
+                // } catch (e) {
+                //   print(e);
+                // }
+              },
+              child: const Text('check authentication with biomtric'),
+              //todo: to be removed from section 101
+              //todo: imlpement a double function to produce a little safari authentication
+            ),
+          ],
         ),
       ),
     );

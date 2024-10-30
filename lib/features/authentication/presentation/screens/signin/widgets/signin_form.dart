@@ -21,69 +21,83 @@ class _SignInFormState extends State<SignInForm> {
   final TextEditingController _passwordController = TextEditingController();
   bool isObscure = true;
 
-  @override
-  Widget build(BuildContext context) {
-    return Form(
-      key: _formKey,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          CustomTextFormField(
-            hintText: 'Email',
-            controller: _emailController,
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Email is required';
-              }
-              return null;
-            },
-            suffixIcon: const Icon(Icons.mail_outline),
-          ),
-          SizedBox(height: 29.sp),
-          CustomTextFormField(
-            hintText: 'Password',
-            controller: _passwordController,
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Password is required';
-              }
-              return null;
-            },
-            isObscure: isObscure,
-            suffixIcon: InkWell(
-              onTap: () {
-                setState(() {
-                  isObscure = !isObscure;
-                });
-              },
-              child: Icon(
-                isObscure ? Icons.lock_outlined : Icons.lock_open_outlined,
+  void _onSignInButtonClicked() {
+    if (_formKey.currentState!.validate()) {
+      FocusScope.of(context).unfocus();
+      context.read<AuthBloc>().add(
+            SignInEvent(
+              reqEntity: SignInRequestEntity(
+                email: _emailController.text.trim(),
+                password: _passwordController.text.trim(),
               ),
             ),
-          ),
-          SizedBox(height: 20.sp),
-          _buildForgetPasswordLabel(),
-          SizedBox(height: 50.sp),
-          SizedBox(
-            width: MediaQuery.of(context).size.width,
-            child: ElevatedButton(
-              onPressed: () {
-                if (_formKey.currentState!.validate()) {
-                  FocusScope.of(context).unfocus();
-                  context.read<AuthBloc>().add(
-                        SignInEvent(
-                          reqEntity: SignInRequestEntity(
-                            email: _emailController.text.trim(),
-                            password: _passwordController.text.trim(),
-                          ),
-                        ),
-                      );
+          );
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocListener<AuthBloc, AuthState>(
+      listenWhen: (previous, current) => current is UserCredentialsLoadedState,
+      listener: (context, state) {
+        if (state is UserCredentialsLoadedState) {
+          setState(() {
+            _emailController.text = state.credentials.email;
+            _passwordController.text = state.credentials.password;
+          });
+          _onSignInButtonClicked();
+        }
+      },
+      child: Form(
+        key: _formKey,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            CustomTextFormField(
+              hintText: 'Email',
+              controller: _emailController,
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Email is required';
                 }
+                return null;
               },
-              child: const Text('Log In'),
+              suffixIcon: const Icon(Icons.mail_outline),
             ),
-          ),
-        ],
+            SizedBox(height: 29.sp),
+            CustomTextFormField(
+              hintText: 'Password',
+              controller: _passwordController,
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Password is required';
+                }
+                return null;
+              },
+              isObscure: isObscure,
+              suffixIcon: InkWell(
+                onTap: () {
+                  setState(() {
+                    isObscure = !isObscure;
+                  });
+                },
+                child: Icon(
+                  isObscure ? Icons.lock_outlined : Icons.lock_open_outlined,
+                ),
+              ),
+            ),
+            SizedBox(height: 20.sp),
+            _buildForgetPasswordLabel(),
+            SizedBox(height: 50.sp),
+            SizedBox(
+              width: MediaQuery.of(context).size.width,
+              child: ElevatedButton(
+                onPressed: _onSignInButtonClicked,
+                child: const Text('Log In'),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

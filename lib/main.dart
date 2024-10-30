@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'package:aidra_drive/core/constant/strings.dart';
-import 'package:aidra_drive/core/hive/hive_adapters.dart';
+import 'package:aidra_drive/core/storage/hive/hive_adapters.dart';
 import 'package:aidra_drive/core/router/auth_listener_wrapper.dart';
 import 'package:aidra_drive/core/router/router.dart';
 import 'package:aidra_drive/core/shared/ui/theme/light_theme.dart';
@@ -52,6 +52,7 @@ class AppView extends StatelessWidget {
       builder: (_, child) {
         return AuthListenerWrapper(
           child: MaterialApp.router(
+            debugShowCheckedModeBanner: false,
             routerConfig: router,
             title: Strings.appTitle.toUpperCase(),
             themeMode: ThemeMode.light,
