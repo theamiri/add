@@ -15,7 +15,8 @@ class AuthListenerWrapper extends StatelessWidget {
           current is AuthenticatedState || current is UnauthenticatedState,
       listener: (context, state) {
         if (state is AuthenticatedState) {
-          router.go(Routes.checkIn.route);
+          //TODO: CHANGE BACK TO CHECK IN SCREEN IN PRODUCTION
+          router.go(Routes.home.route);
         } else if (state is UnauthenticatedState) {
           router.go(Routes.signIn.route);
         }

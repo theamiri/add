@@ -1,8 +1,6 @@
 import 'dart:io';
-
 import 'package:aidra_drive/core/constant/assets.dart';
 import 'package:aidra_drive/core/shared/ui/theme/color_palette.dart';
-import 'package:aidra_drive/core/utils/local_authenticator.dart';
 import 'package:aidra_drive/features/authentication/presentation/logic/auth_bloc/auth_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

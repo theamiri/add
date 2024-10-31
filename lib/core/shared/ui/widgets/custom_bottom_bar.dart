@@ -1,69 +1,57 @@
+import 'package:aidra_drive/core/shared/ui/theme/color_palette.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 
-class AppBottomBar extends StatefulWidget {
+class CustomBottomBar extends StatefulWidget {
   final List<AppBottomBarItem> items;
-  final String centerItemText;
-  final double height;
-  final double iconSize;
-  final Color backgroundColor;
-  final Color color;
-  final Color selectedColor;
-  final NotchedShape notchedShape;
+
   final ValueChanged<int> onTabSelected;
   final int currentIndex;
 
-  const AppBottomBar({
+  const CustomBottomBar({
     super.key,
     required this.items,
-    required this.centerItemText,
-    this.height = 60.0,
-    this.iconSize = 25.0,
-    required this.backgroundColor,
-    required this.color,
-    required this.selectedColor,
-    required this.notchedShape,
     required this.onTabSelected,
     required this.currentIndex,
-  }) : assert(items.length == 2 || items.length == 4);
+  });
 
   @override
-  State<AppBottomBar> createState() => _AppBottomBarState();
+  State<StatefulWidget> createState() => CustomBottomBarState();
 }
 
-class _AppBottomBarState extends State<AppBottomBar> {
+class CustomBottomBarState extends State<CustomBottomBar> {
+  List<Widget> items = [];
+  late int currentIsndex = widget.currentIndex;
+
   void _updateIndex(int index) {
     widget.onTabSelected(index);
-    // setState(() {
-    //   HomeScreen.isMainMenu = false;
-    // });
+    setState(() {
+      currentIsndex = index;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    final items = List<Widget>.generate(widget.items.length, (int index) {
-      return AppBottomBarTabItem(
+    List<Widget> items = List.generate(widget.items.length, (int index) {
+      return _buildTabItem(
         item: widget.items[index],
         index: index,
-        iconSize: widget.iconSize,
-        color: widget.color,
-        selectedColor: widget.selectedColor,
-        isSelected: widget.currentIndex == index,
         onPressed: _updateIndex,
       );
     });
-    items.insert(
-        items.length >> 1, AppBottomBarTabItem.buildMiddleTab(widget.height));
-
+    items.insert(items.length >> 1, _buildMiddleTabItem());
     return Container(
-      constraints: const BoxConstraints(
-        minHeight: 60,
-        maxHeight: 100,
+      color: ColorPalette.antiFlashWhite,
+      constraints: BoxConstraints(
+        minHeight: 60.sp,
+        maxHeight: 100.sp,
       ),
       child: BottomAppBar(
         padding: const EdgeInsets.symmetric(horizontal: 10),
-        shape: widget.notchedShape,
-        notchMargin: 12,
-        color: widget.backgroundColor,
+        shape: const CircularNotchedRectangle(),
+        notchMargin: 12.sp,
+        color: ColorPalette.antiFlashWhite,
         child: Row(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -72,77 +60,48 @@ class _AppBottomBarState extends State<AppBottomBar> {
       ),
     );
   }
-}
 
-class AppBottomBarTabItem extends StatelessWidget {
-  final AppBottomBarItem item;
-  final int index;
-  final double iconSize;
-  final Color color;
-  final Color selectedColor;
-  final bool isSelected;
-  final ValueChanged<int> onPressed;
-
-  const AppBottomBarTabItem({
-    super.key,
-    required this.item,
-    required this.index,
-    required this.iconSize,
-    required this.color,
-    required this.selectedColor,
-    required this.isSelected,
-    required this.onPressed,
-  });
-
-  static Widget buildMiddleTab(double height) {
+  Widget _buildMiddleTabItem() {
     return Expanded(
       child: SizedBox(
-        height: height,
+        height: 60.sp,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            SizedBox(height: height),
+            SizedBox(height: 60.sp),
           ],
         ),
       ),
     );
   }
 
-  @override
-  Widget build(BuildContext context) {
-    final Color itemColor = isSelected ? selectedColor : color;
-
+  Widget _buildTabItem({
+    required AppBottomBarItem item,
+    required int index,
+    required ValueChanged<int> onPressed,
+  }) {
+    // Color color = widget.currentIndex == index
+    //     ? HomeScreen.isMainMenu
+    //         ? widget.color
+    //         : widget.selectedColor
+    //     : widget.color;
     return Expanded(
       child: GestureDetector(
-        onTap: () => onPressed(index),
-        child: SizedBox(
-          height: iconSize,
-          child: Material(
-            type: MaterialType.transparency,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                // AppUtil.getSVGImage(
-                //   '${item.iconName}.svg',
-                //   iconSize,
-                //   iconSize,
-                //   boxFit: BoxFit.fitHeight,
-                //   color: itemColor,
-                // ),
-                // addVerticalSpace(kPadding4),
-                Text(
-                  item.text,
-                  style: TextStyle(
-                    color: itemColor,
-                    fontSize: 11,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
-            ),
-          ),
+        onTap: () {
+          // setState(() {
+          //   HomeScreen.isMainMenu = false;
+          // });
+          // AppUtil.printData("Main menu value ${HomeScreen.isMainMenu}");
+          // onPressed(index);
+        },
+        child: SvgPicture.asset(
+          item.icon,
+          height: 25.sp,
+          // ignore: deprecated_member_use
+          color: widget.currentIndex != currentIsndex
+              ? ColorPalette.lightGreen
+              : ColorPalette.grey,
         ),
       ),
     );
@@ -150,11 +109,9 @@ class AppBottomBarTabItem extends StatelessWidget {
 }
 
 class AppBottomBarItem {
-  final String text;
-  final String iconName;
+  final String icon;
 
-  const AppBottomBarItem({
-    required this.iconName,
-    required this.text,
+  AppBottomBarItem({
+    required this.icon,
   });
 }

@@ -1,5 +1,9 @@
+import 'package:aidra_drive/core/constant/assets.dart';
+import 'package:aidra_drive/core/shared/ui/theme/color_palette.dart';
 import 'package:aidra_drive/core/shared/ui/widgets/custom_bottom_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 
 class NavBarWrapper extends StatefulWidget {
@@ -17,32 +21,46 @@ class _NavBarWrapperState extends State<NavBarWrapper> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: AppBottomBar(
-        items: const [
-          AppBottomBarItem(
-            iconName: 'home',
-            text: 'Home',
-          ),
-          AppBottomBarItem(
-            iconName: 'bible',
-            text: 'Bible',
-          ),
-          AppBottomBarItem(
-            iconName: 'bookmark',
-            text: 'Bookmarks',
-          ),
-          AppBottomBarItem(
-            iconName: 'user',
-            text: 'Profile',
-          ),
-        ],
-        centerItemText: '',
-        backgroundColor: const Color(0xFF34211d),
-        color: const Color(0xFFfeefba),
-        selectedColor: const Color(0xFFe6ac63),
-        notchedShape: const CircularNotchedRectangle(),
-        onTabSelected: _onTap,
-        currentIndex: _selectedIndex,
+      bottomNavigationBar: SizedBox(
+        width: MediaQuery.of(context).size.width,
+        height: 80.sp,
+        child: Stack(
+          children: [
+            Container(
+              decoration:
+                  const BoxDecoration(color: ColorPalette.white, boxShadow: [
+                BoxShadow(
+                  blurRadius: 40,
+                  spreadRadius: 2,
+                  color: ColorPalette.grey,
+                  offset: Offset(0, -5),
+                ),
+              ]),
+            ),
+            Transform.translate(
+              offset: Offset(150.sp, -25.sp),
+              child: SizedBox(
+                height: 70.sp,
+                width: 70.sp,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    shape: const CircleBorder(),
+                    padding: const EdgeInsets.all(15),
+                    side: const BorderSide(
+                      color: Colors.white, // Border color
+                      width: 10, // Border width
+                    ),
+                  ),
+                  onPressed: () {},
+                  child: SvgPicture.asset(
+                    Assets.faceId,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
       body: widget.navigationShell,
     );

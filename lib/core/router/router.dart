@@ -13,11 +13,18 @@ final router = GoRouter(
   routes: <RouteBase>[
     StatefulShellRoute.indexedStack(
       builder: (context, state, navigationShell) {
-        return NavBarWrapper(navigationShell);
+        return NavBarWrapper(
+          navigationShell,
+        );
       },
       branches: [
         StatefulShellBranch(
           navigatorKey: _sectionNavigatorKey,
+          routes: <RouteBase>[
+            Routes.home.build,
+          ],
+        ),
+        StatefulShellBranch(
           routes: <RouteBase>[
             Routes.contentNotFound.build,
           ],

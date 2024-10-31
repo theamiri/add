@@ -620,6 +620,12 @@
       "languageVersion": "3.0"
     },
     {
+      "name": "simple_circular_progress_bar",
+      "rootUri": "file:///Users/theamiri/.pub-cache/hosted/pub.dev/simple_circular_progress_bar-1.0.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "sky_engine",
       "rootUri": "file:///Users/theamiri/dev/flutter/bin/cache/pkg/sky_engine",
       "packageUri": "lib/",
@@ -782,7 +788,7 @@
       "languageVersion": "3.5"
     }
   ],
-  "generated": "2024-10-30T13:33:50.151475Z",
+  "generated": "2024-10-31T15:20:12.469078Z",
   "generator": "pub",
   "generatorVersion": "3.5.4",
   "flutterRoot": "file:///Users/theamiri/dev/flutter",
