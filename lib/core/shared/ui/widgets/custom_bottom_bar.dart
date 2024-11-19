@@ -1,33 +1,46 @@
-import 'package:aidra_drive/core/shared/ui/theme/color_palette.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
-class CustomBottomBar extends StatefulWidget {
+class AppBottomBar extends StatefulWidget {
   final List<AppBottomBarItem> items;
-
+  final String centerItemText;
+  final double height;
+  final double iconSize;
+  final Color backgroundColor;
+  final Color color;
+  final Color selectedColor;
+  final NotchedShape notchedShape;
   final ValueChanged<int> onTabSelected;
-  final int currentIndex;
+  late int currentIndex;
 
-  const CustomBottomBar({
+  AppBottomBar({
     super.key,
     required this.items,
+    required this.centerItemText,
+    this.height = 60.0,
+    this.iconSize = 25.0,
+    required this.backgroundColor,
+    required this.color,
+    required this.selectedColor,
+    required this.notchedShape,
     required this.onTabSelected,
     required this.currentIndex,
-  });
+  }) {
+    assert(items.length == 2 || items.length == 4);
+  }
 
   @override
-  State<StatefulWidget> createState() => CustomBottomBarState();
+  State<StatefulWidget> createState() => AppBottomBarState();
 }
 
-class CustomBottomBarState extends State<CustomBottomBar> {
+class AppBottomBarState extends State<AppBottomBar> {
   List<Widget> items = [];
-  late int currentIsndex = widget.currentIndex;
 
   void _updateIndex(int index) {
     widget.onTabSelected(index);
     setState(() {
-      currentIsndex = index;
+      widget.currentIndex = index;
     });
   }
 
@@ -41,17 +54,17 @@ class CustomBottomBarState extends State<CustomBottomBar> {
       );
     });
     items.insert(items.length >> 1, _buildMiddleTabItem());
+
     return Container(
-      color: ColorPalette.antiFlashWhite,
-      constraints: BoxConstraints(
-        minHeight: 60.sp,
-        maxHeight: 100.sp,
+      constraints: const BoxConstraints(
+        minHeight: 60,
+        maxHeight: 100,
       ),
       child: BottomAppBar(
         padding: const EdgeInsets.symmetric(horizontal: 10),
-        shape: const CircularNotchedRectangle(),
-        notchMargin: 12.sp,
-        color: ColorPalette.antiFlashWhite,
+        shape: widget.notchedShape,
+        notchMargin: 12,
+        color: widget.backgroundColor,
         child: Row(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -64,12 +77,12 @@ class CustomBottomBarState extends State<CustomBottomBar> {
   Widget _buildMiddleTabItem() {
     return Expanded(
       child: SizedBox(
-        height: 60.sp,
+        height: widget.height,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            SizedBox(height: 60.sp),
+            SizedBox(height: widget.iconSize),
           ],
         ),
       ),
@@ -81,27 +94,43 @@ class CustomBottomBarState extends State<CustomBottomBar> {
     required int index,
     required ValueChanged<int> onPressed,
   }) {
-    // Color color = widget.currentIndex == index
-    //     ? HomeScreen.isMainMenu
-    //         ? widget.color
-    //         : widget.selectedColor
-    //     : widget.color;
+    bool isConditionValid = 1 == 1;
+    Color color = widget.currentIndex == index
+        ? isConditionValid
+            ? widget.color
+            : widget.selectedColor
+        : widget.color;
     return Expanded(
       child: GestureDetector(
         onTap: () {
-          // setState(() {
-          //   HomeScreen.isMainMenu = false;
-          // });
-          // AppUtil.printData("Main menu value ${HomeScreen.isMainMenu}");
-          // onPressed(index);
+          setState(() {
+            isConditionValid = false;
+          });
+          onPressed(index);
         },
-        child: SvgPicture.asset(
-          item.icon,
-          height: 25.sp,
-          // ignore: deprecated_member_use
-          color: widget.currentIndex != currentIsndex
-              ? ColorPalette.lightGreen
-              : ColorPalette.grey,
+        child: SizedBox(
+          height: widget.height,
+          child: Material(
+            type: MaterialType.transparency,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                SvgPicture.asset(
+                  item.iconName,
+                  height: widget.iconSize,
+                  width: widget.iconSize,
+                  color: color,
+                ),
+                SizedBox(height: 10.sp),
+                Text(
+                  item.text,
+                  style: TextStyle(
+                      color: color, fontSize: 11, fontWeight: FontWeight.bold),
+                )
+              ],
+            ),
+          ),
         ),
       ),
     );
@@ -109,9 +138,11 @@ class CustomBottomBarState extends State<CustomBottomBar> {
 }
 
 class AppBottomBarItem {
-  final String icon;
+  String text;
+  final String iconName;
 
   AppBottomBarItem({
-    required this.icon,
+    required this.iconName,
+    required this.text,
   });
 }

@@ -12,6 +12,7 @@ abstract class Strings {
 
   //failureMessages
   //TODO: need to be placed inside translation file since they not statics
+
   static const storageFailureMessage =
       'An error occurred while accessing device storage. Please check your device storage permission and try again';
   static const networkFailureMessage =

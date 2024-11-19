@@ -12,7 +12,11 @@ final router = GoRouter(
   initialLocation: Routes.splash.route,
   routes: <RouteBase>[
     StatefulShellRoute.indexedStack(
-      builder: (context, state, navigationShell) {
+      builder: (
+        context,
+        state,
+        navigationShell,
+      ) {
         return NavBarWrapper(
           navigationShell,
         );
@@ -21,27 +25,27 @@ final router = GoRouter(
         StatefulShellBranch(
           navigatorKey: _sectionNavigatorKey,
           routes: <RouteBase>[
-            Routes.home.build,
+            Routes.mainMenu.build,
           ],
         ),
         StatefulShellBranch(
           routes: <RouteBase>[
-            Routes.contentNotFound.build,
+            Routes.mainMenu.build,
           ],
         ),
         StatefulShellBranch(
           routes: <RouteBase>[
-            Routes.contentNotFound.build,
+            Routes.mainMenu.build,
           ],
         ),
         StatefulShellBranch(
           routes: <RouteBase>[
-            Routes.contentNotFound.build,
+            Routes.mainMenu.build,
           ],
         ),
         StatefulShellBranch(
           routes: <RouteBase>[
-            Routes.contentNotFound.build,
+            Routes.mainMenu.build,
           ],
         ),
       ],
@@ -50,7 +54,7 @@ final router = GoRouter(
     Routes.signIn.build,
     Routes.forgetPassword.build,
     Routes.checkIn.build,
-    Routes.home.build,
+    Routes.mainMenu.build,
     Routes.contentNotFound.build,
   ],
 );

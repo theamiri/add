@@ -30,7 +30,7 @@ class CheckInScreen extends StatelessWidget {
           CustomActionSlider(
             label: 'submit',
             action: (controller) async {
-              router.go(Routes.home.route);
+              router.go(Routes.mainMenu.route);
             },
           ),
         ],

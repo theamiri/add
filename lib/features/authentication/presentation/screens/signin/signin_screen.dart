@@ -1,5 +1,4 @@
 import 'package:aidra_drive/core/extension/padding_extensions.dart';
-import 'package:aidra_drive/core/shared/ui/screens/home_screen.dart';
 import 'package:aidra_drive/core/shared/ui/widgets/custom_loading_indicator.dart';
 import 'package:aidra_drive/core/shared/ui/widgets/custom_snackbar.dart';
 import 'package:aidra_drive/features/authentication/presentation/logic/auth_bloc/auth_bloc.dart';
@@ -23,17 +22,7 @@ class SignInScreen extends StatelessWidget {
           CustomSnackBar.displayError(context, state.failure);
         }
         if (state is AuthenticatedState) {
-          CustomSnackBar.displaySuccess(
-            context,
-            'Welcome back!',
-          );
-          //TODO: NAVIGATE TO HOME SCREEN || use go router instead of built in routing soulution
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const HomeScreen(),
-            ),
-          );
+          CustomSnackBar.displaySuccess(context, 'Welcome back!');
         }
       },
       builder: (context, state) {
@@ -48,8 +37,6 @@ class SignInScreen extends StatelessWidget {
                     SignInHeader(),
                     SignInForm(),
                     BiomitricAuthButtons(),
-                    //TODO: replace sizedbox with a language picker widget
-                    SizedBox(),
                   ],
                 ).applyDefaultScaffoldPadding,
                 Visibility(

@@ -1,5 +1,5 @@
 import 'package:aidra_drive/core/shared/ui/screens/content_not_found_screen.dart';
-import 'package:aidra_drive/core/shared/ui/screens/home_screen.dart';
+import 'package:aidra_drive/core/shared/ui/screens/main_menu_screen.dart';
 import 'package:aidra_drive/core/shared/ui/screens/splash_screen.dart';
 import 'package:aidra_drive/features/authentication/presentation/screens/forget_password/forget_password_screen.dart';
 import 'package:aidra_drive/features/authentication/presentation/screens/signin/signin_screen.dart';
@@ -11,7 +11,7 @@ enum Routes {
   signIn,
   forgetPassword,
   checkIn,
-  home,
+  mainMenu,
   contentNotFound,
 }
 
@@ -26,8 +26,8 @@ extension RoutesExtension on Routes {
         return '/forget_password';
       case Routes.checkIn:
         return '/checkin';
-      case Routes.home:
-        return '/home';
+      case Routes.mainMenu:
+        return '/main_menu';
       default:
         return '/content_not_found';
     }
@@ -57,10 +57,10 @@ extension BuildRoutes on Routes {
           path: route,
           builder: (context, state) => const CheckInScreen(),
         );
-      case Routes.home:
+      case Routes.mainMenu:
         return GoRoute(
           path: route,
-          builder: (context, state) => const HomeScreen(),
+          builder: (context, state) => const MainMenuScreen(),
         );
       default:
         return GoRoute(

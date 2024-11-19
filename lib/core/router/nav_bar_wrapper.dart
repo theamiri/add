@@ -1,9 +1,8 @@
-import 'package:aidra_drive/core/constant/assets.dart';
 import 'package:aidra_drive/core/shared/ui/theme/color_palette.dart';
-import 'package:aidra_drive/core/shared/ui/widgets/custom_bottom_bar.dart';
+import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
+
 import 'package:go_router/go_router.dart';
 
 class NavBarWrapper extends StatefulWidget {
@@ -16,63 +15,54 @@ class NavBarWrapper extends StatefulWidget {
 }
 
 class _NavBarWrapperState extends State<NavBarWrapper> {
-  int _selectedIndex = 0;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: SizedBox(
-        width: MediaQuery.of(context).size.width,
-        height: 80.sp,
-        child: Stack(
-          children: [
-            Container(
-              decoration:
-                  const BoxDecoration(color: ColorPalette.white, boxShadow: [
-                BoxShadow(
-                  blurRadius: 40,
-                  spreadRadius: 2,
-                  color: ColorPalette.grey,
-                  offset: Offset(0, -5),
-                ),
-              ]),
+      body: widget.navigationShell,
+      floatingActionButton: Material(
+        color: ColorPalette.tiffanyBlue,
+        shape: const CircleBorder(),
+        child: InkWell(
+          borderRadius: BorderRadius.circular(30.0),
+          onTap: () {},
+          child: SizedBox(
+            width: 55.sp,
+            height: 55.sp,
+            child: Icon(
+              Icons.dashboard,
+              color: ColorPalette.white,
+              size: 30.sp,
             ),
-            Transform.translate(
-              offset: Offset(150.sp, -25.sp),
-              child: SizedBox(
-                height: 70.sp,
-                width: 70.sp,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    shape: const CircleBorder(),
-                    padding: const EdgeInsets.all(15),
-                    side: const BorderSide(
-                      color: Colors.white, // Border color
-                      width: 10, // Border width
-                    ),
-                  ),
-                  onPressed: () {},
-                  child: SvgPicture.asset(
-                    Assets.faceId,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-            ),
-          ],
+          ),
         ),
       ),
-      body: widget.navigationShell,
-    );
-  }
-
-  void _onTap(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-    widget.navigationShell.goBranch(
-      index,
-      initialLocation: index == widget.navigationShell.currentIndex,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      bottomNavigationBar: AnimatedBottomNavigationBar(
+        shadow: const BoxShadow(
+          blurRadius: 10,
+          color: ColorPalette.grey,
+          offset: Offset(0, 3),
+        ),
+        height: 50.sp,
+        leftCornerRadius: 20,
+        rightCornerRadius: 20,
+        gapWidth: 85.sp,
+        iconSize: 26.sp,
+        notchMargin: 12,
+        inactiveColor: ColorPalette.grey.withOpacity(0.7),
+        activeColor: ColorPalette.tiffanyBlue,
+        icons: const [
+          Icons.speed,
+          Icons.school,
+          Icons.notifications,
+          Icons.settings,
+        ],
+        activeIndex: 0,
+        gapLocation: GapLocation.center,
+        notchSmoothness: NotchSmoothness.softEdge,
+        onTap: (index) {},
+        //other params
+      ),
     );
   }
 }
